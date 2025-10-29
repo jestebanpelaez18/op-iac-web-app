@@ -2,6 +2,8 @@ import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import * as s3 from 'aws-cdk-lib/aws-s3';
 import * as s3deploy from 'aws-cdk-lib/aws-s3-deployment';
+import * as lambda from 'aws-cdk-lib/aws-lambda';
+import * as apigateway from 'aws-cdk-lib/aws-apigateway';
 
 export class InfraStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -27,5 +29,9 @@ export class InfraStack extends cdk.Stack {
     new cdk.CfnOutput(this, 'WebAppBucketOutputURL', {
       value: WebAppBucket.bucketWebsiteUrl,
     });
+
+    /* API and Lambda setup will go here */
+
+
   }
 }
