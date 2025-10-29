@@ -1,11 +1,14 @@
-export const handler = async (event: any) => {
+import { APIGatewayProxyHandlerV2 } from 'aws-lambda';
+
+export const hello: APIGatewayProxyHandlerV2 = async (event:any) => {
   return {
     statusCode: 200,
-    headers: { 'content-type': 'application/json' },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      message: 'Hello OP, from the backend',
+      message: 'Hello OP, from AWS Lambda 👋',
       path: event.rawPath,
       time: new Date().toISOString(),
     }),
   };
 };
+
