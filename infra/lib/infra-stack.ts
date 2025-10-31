@@ -23,11 +23,6 @@ export class InfraStack extends cdk.Stack {
       autoDeleteObjects: true,
     });
 
-    new s3deploy.BucketDeployment(this, 'WebAppDeployment', {
-      sources: [s3deploy.Source.asset('../frontend')],
-      destinationBucket: WebAppBucket,
-    });
-
     new cdk.CfnOutput(this, 'WebAppBucketOutputURL', {
       value: WebAppBucket.bucketWebsiteUrl,
     });
@@ -60,5 +55,13 @@ export class InfraStack extends cdk.Stack {
     hello.addMethod('GET', new apigateway.LambdaIntegration(helloLambda));
 
     new cdk.CfnOutput(this, 'ApiUrl', { value: api.url! });
+
+        /*Specifies bucket deployment sources are uploaded to S3*/
+    new s3deploy.BucketDeployment(this, 'WebAppDeployment', {
+      sources: [s3deploy.Source.asset('../frontend'),
+        s3deploy.Source.data('config.js', `window.APP_CONFIG = { apiUrl: "${api.url}" };`),
+      ],
+      destinationBucket: WebAppBucket,
+    });
   }
 }
