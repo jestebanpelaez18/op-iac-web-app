@@ -2,6 +2,10 @@ import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import * as s3 from 'aws-cdk-lib/aws-s3';
 import * as s3deploy from 'aws-cdk-lib/aws-s3-deployment';
+import * as lambda from 'aws-cdk-lib/aws-lambda';
+import * as apigateway from 'aws-cdk-lib/aws-apigateway';
+import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
+import * as path from 'path';
 
 export class InfraStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -27,5 +31,34 @@ export class InfraStack extends cdk.Stack {
     new cdk.CfnOutput(this, 'WebAppBucketOutputURL', {
       value: WebAppBucket.bucketWebsiteUrl,
     });
+
+    /* API and Lambda setup will go here */
+
+    /* Lambda function */
+    const helloLambda = new NodejsFunction(this, 'HelloLambda', {
+      runtime: lambda.Runtime.NODEJS_20_X, 
+      entry: path.join(__dirname, '../../backend/src/hello.ts'),
+      handler: 'hello',
+    });
+
+    /* API Gateway setup */
+    const api = new apigateway.RestApi(this, 'WebApi', {
+      restApiName: 'WebApi',
+      deployOptions: { stageName: 'prod' },
+      defaultCorsPreflightOptions: {
+        allowOrigins: apigateway.Cors.ALL_ORIGINS,
+        allowMethods: ['GET'],
+      },
+    });
+
+    /*API Methotd for the root */
+
+    api.root.addMethod('GET', new apigateway.LambdaIntegration(helloLambda));
+    
+    /* API Resource and Method for /hello */
+    const hello = api.root.addResource('hello');
+    hello.addMethod('GET', new apigateway.LambdaIntegration(helloLambda));
+
+    new cdk.CfnOutput(this, 'ApiUrl', { value: api.url! });
   }
 }
