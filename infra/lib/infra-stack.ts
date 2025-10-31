@@ -36,7 +36,7 @@ export class InfraStack extends cdk.Stack {
 
     /* Lambda function */
     const helloLambda = new NodejsFunction(this, 'HelloLambda', {
-      runtime: lambda.Runtime.NODEJS_20_X, /* Choose any supported Node.js runtime */
+      runtime: lambda.Runtime.NODEJS_20_X, 
       entry: path.join(__dirname, '../../backend/src/hello.ts'),
       handler: 'hello',
     });
@@ -51,6 +51,11 @@ export class InfraStack extends cdk.Stack {
       },
     });
 
+    /*API Methotd for the root */
+
+    api.root.addMethod('GET', new apigateway.LambdaIntegration(helloLambda));
+    
+    /* API Resource and Method for /hello */
     const hello = api.root.addResource('hello');
     hello.addMethod('GET', new apigateway.LambdaIntegration(helloLambda));
 
