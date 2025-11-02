@@ -1,11 +1,24 @@
-<!DOCTYPE html>
-<html   lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>OP IaC App</title>
-  </head>
-  <body>
-    <h1>Hola OP 👋: Static site from S3 (CDK)</h1>
-    <p>Deploy with AWS CDK.</p>
-  </body>
-</html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>OP IaC App</title>
+</head>
+<body>
+  <h1>Hola OP 👋. This is Juan</h1>
+  <p>Deploy reproducible con AWS CDK.</p>
+
+  <h2>Frontend ✅</h2>
+  <p>Served from S3 static website.</p>
+
+  <h2>Backend (Lambda behind API Gateway)</h2>
+  <pre id="out">Loading...</pre>
+
+  <script src="config.js"></script>
+  <script>
+    fetch(window.APP_CONFIG.apiUrl + 'hello')
+      .then(r => r.json())
+      .then(d => document.getElementById('out').textContent = JSON.stringify(d, null, 2))
+      .catch(e => document.getElementById('out').textContent = 'Error: ' + e);
+  </script>
+</body>

@@ -3,7 +3,10 @@ import { APIGatewayProxyHandlerV2 } from 'aws-lambda';
 export const hello: APIGatewayProxyHandlerV2 = async (event:any) => {
   return {
     statusCode: 200,
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET,OPTIONS',
+     },
     body: JSON.stringify({
       message: 'Hello OP, from AWS Lambda 👋',
       path: event.rawPath,
