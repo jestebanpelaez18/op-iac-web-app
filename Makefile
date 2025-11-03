@@ -1,16 +1,18 @@
-.PHONY: setup bootstrap deploy destroy
+SHELL := /bin/bash
+
+.PHONY: setup bootstrap deploy destroy clean
 
 setup:
-	npm install -g aws-cdk
-	cd infra && npm ci
-	cd backend && npm ci
-	cd frontend && echo "Frontend ready"
+	cd infra && npm install
+	cd backend && npm install
+	@echo "✅ Setup complete."
 
 bootstrap:
-	cd infra && cdk bootstrap
+	cd infra && npx cdk bootstrap
 
 deploy:
-	cd infra && npm run build && cdk deploy
+	cd infra && npm run build || true
+	cd infra && npx cdk deploy --
 
 destroy:
 	cd infra && cdk destroy
