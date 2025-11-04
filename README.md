@@ -203,6 +203,6 @@ The current implementation has a few missing features or non-ideal aspects that 
 
 ## 12. References 
 
-* **AWS CDK Documentation[https://docs.aws.amazon.com/cdk/v2/guide/home.html]**
-* **AWS CDK Prerequisites[https://docs.aws.amazon.com/cdk/v2/guide/prerequisites.html]**
-* **AWS Lambda with API Gateway[https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_lambda-readme.html]**
+* **[AWS CDK Documentation](https://docs.aws.amazon.com/cdk/v2/guide/home.html)**
+* **[AWS CDK Prerequisites](https://docs.aws.amazon.com/cdk/v2/guide/prerequisites.html)**
+* **[AWS Lambda with API Gateway](https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_lambda-readme.html)**
