@@ -23,7 +23,7 @@ The main objectives were:
 
 ---
 
-## 3. Repository Structure 📂
+## 3. Repository Structure 
 
 | Directory/File | Description |
 | :--- | :--- |
@@ -35,7 +35,7 @@ The main objectives were:
 
 ---
 
-## 4. Prerequisites 🛠️
+## 4. Prerequisites 
 
 Before starting, please ensure you have the following installed and configured:
 
@@ -49,7 +49,7 @@ Before starting, please ensure you have the following installed and configured:
 
 ---
 
-## 5. Setup and Installation ⚙️
+## 5. Setup and Installation 
 
 ### Option A — Using `make` (Recommended)
 
@@ -81,7 +81,7 @@ This is the easiest way to install everything and deploy the stack.
     npx cdk deploy
     ```
 
-### Post-Deployment 🚀
+### Post-Deployment 
 
 After deployment, you'll see outputs similar to this:
 
@@ -92,7 +92,7 @@ After deployment, you'll see outputs similar to this:
 
 ---
 
-## 6. How It Works 💡
+## 6. How It Works 
 
 Here is a brief overview of the architecture and flow:
 
@@ -107,7 +107,7 @@ You open the website → it loads from S3 → calls the API → and shows the ba
 
 ---
 
-## 7. Deploy and Destroy ♻️
+## 7. Deploy and Destroy 
 
 ### Deploy the Application
 
@@ -137,7 +137,7 @@ make destroy
 cd infra && npx cdk destroy
 ```
 
-## 8. Testing ✅
+## 8. Testing 
 
 You can verify the successful deployment of the frontend and backend in two ways:
 
@@ -171,3 +171,10 @@ This project makes the following assumptions and design trade-offs for simplicit
 * **CORS:** Cross-Origin Resource Sharing (**CORS**) is enabled for **all origins** (`*`) to simplify frontend-backend communication.
 * **Focus:** The project focuses primarily on **infrastructure quality and clarity** (CDK, Lambda, API Gateway integration), not sophisticated frontend design.
 
+## 10. Missing Parts or Non-Idealities 🚧
+
+The current implementation has a few missing features or non-ideal aspects that are out of the scope of this initial demonstration:
+
+* **No authentication or persistent storage:** These features (e.g., database integration, user sign-in) were **out of scope** for this project.
+* **No HTTPS for the static website:** Enabling HTTPS would require setting up a custom domain and integrating **CloudFront** (which was avoided for deployment speed and simplicity).
+* **Minimal error handling and no automated tests:** The focus was on infrastructure deployment. Functionality was verified through **manual testing** (as outlined in Section 8).
