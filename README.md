@@ -40,14 +40,35 @@ The main objectives were:
 Before starting, please ensure you have the following installed and configured:
 
 * **Node.js** (v18 or newer)
-* **AWS CLI** installed and configured with valid credentials:
+    * Verify installation:
+    ```bash
+    node -v
+    ```
+
+* **AWS CLI** installed and configured with **valid credentials**.
+    The project uses your local AWS CLI configuration for authentication.
+    Run the following command if you haven’t configured it yet:
     ```bash
     aws configure
     ```
-* An **AWS account** with permissions to deploy **S3**, **Lambda**, and **API Gateway**.
-* **(Optional)** **make** installed for one-command setup (included by default on macOS/Linux - Ubuntu/Debian: sudo apt install make).
+    You will be prompted to enter the following information:
+    * **AWS Access Key ID**
+    * **AWS Secret Access Key**
+    * **Default region name** (for example: `eu-north-1`)
+    * **Default output format** (press Enter for none)
+    
+    > **Note:** These credentials must belong to your **own AWS account**. They are stored locally in `~/.aws/credentials` and used automatically by **CDK** during deployment. Each user runs the stack in their own AWS account; **credentials are never shared**.
 
-No global packages are required — the project uses local dependencies only (npx cdk).
+* An **AWS account** with permissions to deploy **S3**, **Lambda**, and **API Gateway** resources.
+
+* **(Optional)** **make** for one-command setup (included by default on macOS/Linux).
+    * Ubuntu/Debian:
+    ```bash
+    sudo apt install make
+    ```
+
+> **Important:** No global packages are required — the project relies on **local dependencies only** (managed via `npx cdk` and `npm`).
+
 ---
 
 ## 5. Setup and Installation 
@@ -86,8 +107,8 @@ This is the easiest way to install everything and deploy the stack.
 
 After deployment, you'll see outputs similar to this:
 
--InfraStack.ApiUrl = https://xxxx.execute-api.eu-north-1.amazonaws.com/prod/
--InfraStack.WebAppBucketOutputURL = http://infrastack-webappbucket-xxxx.s3-website.eu-north-1.amazonaws.com
+* InfraStack.ApiUrl = https://xxxx.execute-api.eu-north-1.amazonaws.com/prod/
+* InfraStack.WebAppBucketOutputURL = http://infrastack-webappbucket-xxxx.s3-website.eu-north-1.amazonaws.com
 
 **Copy and open the `InfraStack.WebAppBucketOutputURL` in your browser.** You'll see a simple static page that successfully fetches and displays a live response from the backend API.
 
@@ -179,3 +200,9 @@ The current implementation has a few missing features or non-ideal aspects that 
 * **No authentication or persistent storage:** These features (e.g., database integration, user sign-in) were **out of scope** for this project.
 * **No HTTPS for the static website:** Enabling HTTPS would require setting up a custom domain and integrating **CloudFront** (which was avoided for deployment speed and simplicity).
 * **Minimal error handling and no automated tests:** The focus was on infrastructure deployment. Functionality was verified through **manual testing** (as outlined in Section 8).
+
+## 12. References 
+
+* **AWS CDK Documentation[https://docs.aws.amazon.com/cdk/v2/guide/home.html]**
+* **AWS CDK Prerequisites[https://docs.aws.amazon.com/cdk/v2/guide/prerequisites.html]**
+* **AWS Lambda with API Gateway[https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_lambda-readme.html]**
