@@ -45,8 +45,9 @@ Before starting, please ensure you have the following installed and configured:
     aws configure
     ```
 * An **AWS account** with permissions to deploy **S3**, **Lambda**, and **API Gateway**.
-* **(Optional)** **make** installed for one-command setup (included by default on macOS/Linux).
+* **(Optional)** **make** installed for one-command setup (included by default on macOS/Linux - Ubuntu/Debian: sudo apt install make).
 
+No global packages are required — the project uses local dependencies only (npx cdk).
 ---
 
 ## 5. Setup and Installation 
